@@ -4,6 +4,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define PARENT(node) (node->parent)
+#define GRANDPARENT(node) (PARENT(PARENT(node)))
+
 /**
  * enum rb_color_e - Possible color of a Red-Black tree
  *

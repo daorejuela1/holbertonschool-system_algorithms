@@ -102,27 +102,26 @@ static rb_tree_t *bst_insert(rb_tree_t **root, int value)
  */
 static rb_tree_t *fix_left(rb_tree_t **root, rb_tree_t *new)
 {
-	rb_tree_t *parent = new->parent;
-	rb_tree_t *grand_parent = new->parent->parent;
-	rb_tree_t *uncle = grand_parent->left;
+	rb_tree_t *uncle = GRANDPARENT(new)->left;
 
+	/* printf("FIX LEFT UNCLE [%d]\n", new->n); */
 	if (uncle && uncle->color == RED)
 	{
-		parent->color = BLACK;
 		uncle->color = BLACK;
-		grand_parent->color = RED;
-		new = new->parent->parent;
+		PARENT(new)->color = BLACK;
+		GRANDPARENT(new)->color = RED;
+		new = GRANDPARENT(new);
 	}
 	else
 	{
-		if (new == new->parent->left)
+		if (new == PARENT(new)->left)
 		{
-			new = new->parent;
+			new = PARENT(new);
 			rotate_right(root, new);
 		}
-		parent->color = BLACK;
-		grand_parent->color = RED;
-		rotate_left(root, grand_parent);
+		PARENT(new)->color = BLACK;
+		GRANDPARENT(new)->color = RED;
+		rotate_left(root, GRANDPARENT(new));
 	}
 	return (new);
 }
@@ -135,31 +134,28 @@ static rb_tree_t *fix_left(rb_tree_t **root, rb_tree_t *new)
  */
 rb_tree_t *fix_right(rb_tree_t **root, rb_tree_t *new)
 {
-	rb_tree_t *parent = new->parent;
-	rb_tree_t *grand_parent = new->parent->parent;
-	rb_tree_t *uncle = grand_parent->right;
+	rb_tree_t *uncle = GRANDPARENT(new)->right;
 
 	if (uncle && uncle->color == RED)
 	{
-		parent->color = BLACK;
 		uncle->color = BLACK;
-		grand_parent->color = RED;
-		new = new->parent->parent;
+		PARENT(new)->color = BLACK;
+		GRANDPARENT(new)->color = RED;
+		new = GRANDPARENT(new);
 	}
 	else
 	{
-		if (new == new->parent->right)
+		if (new == PARENT(new)->right)
 		{
-			new = new->parent;
+			new = PARENT(new);
 			rotate_left(root, new);
 		}
-		parent->color = BLACK;
-		grand_parent->parent->color = RED;
-		rotate_right(root, grand_parent);
+		PARENT(new)->color = BLACK;
+		GRANDPARENT(new)->color = RED;
+		rotate_right(root, GRANDPARENT(new));
 	}
 	return (new);
 }
-
 /**
  * conserve_properties - assures that rb is ok
  * @root: root new of the rb_root
@@ -168,13 +164,12 @@ rb_tree_t *fix_right(rb_tree_t **root, rb_tree_t *new)
  */
 void conserve_properties(rb_tree_t **root, rb_tree_t *new)
 {
-	rb_tree_t *parent = new->parent;
 	rb_tree_t *grand_parent = NULL;
 
-	while (new != *root && parent && parent->color == RED)
+	while (new != *root && PARENT(new) && PARENT(new)->color == RED)
 	{
-		grand_parent = new->parent->parent;
-		if (new->parent == grand_parent->left)
+		grand_parent = GRANDPARENT(new);
+		if (PARENT(new) == grand_parent->left)
 		{
 			new = fix_right(root, new);
 		}
