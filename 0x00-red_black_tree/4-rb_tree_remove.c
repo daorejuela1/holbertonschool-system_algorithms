@@ -46,7 +46,7 @@ rb_tree_t *rb_tree_remove(rb_tree_t *root, int n)
 			free(root);
 			return (temp);
 		}
-		temp = minValueNode(root->right);
+		temp = min_value(root->right);
 		root->n = temp->n;
 		root->right = rb_tree_remove(root->right, temp->n);
 	}
