@@ -1,5 +1,10 @@
 #ifndef _GRAPHS_H
 #define _GRAPHS_H
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 #define VISITED void (*action)(const vertex_t *v, size_t depth)
 /**
  * enum edge_type_e - Enumerates the different types of
@@ -69,4 +74,5 @@ int graph_add_edge(graph_t *graph, const char *src, const char *, edge_type_t);
 void graph_delete(graph_t *graph);
 size_t depth_first_traverse(const graph_t *graph, VISITED);
 size_t breadth_first_traverse(const graph_t *graph, VISITED);
+void graph_display(const graph_t *graph);
 #endif
