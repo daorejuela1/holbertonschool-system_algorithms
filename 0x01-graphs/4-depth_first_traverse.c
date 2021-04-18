@@ -3,7 +3,7 @@
 #define ACTION void (*action)(const vertex_t *v, size_t depth)
 
 /**
- * depth - helper function for depth_first_traverse
+ * depth_get - helper function for depth_first_traverse
  * @v: vertex being dealt with
  * @action: action to take on vertex
  * @seen: array that keeps track of which vertexes have been seen
