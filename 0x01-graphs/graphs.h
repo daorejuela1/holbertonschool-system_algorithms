@@ -75,4 +75,5 @@ void graph_delete(graph_t *graph);
 size_t depth_first_traverse(const graph_t *graph, VISITED);
 size_t breadth_first_traverse(const graph_t *graph, VISITED);
 void graph_display(const graph_t *graph);
+typedef void (*action_t)(const vertex_t *, size_t);
 #endif
