@@ -10,7 +10,7 @@
  * @depth: current depth of traversal
  * Return: maximum depth encountered
  **/
-size_t depth(const vertex_t *v, action_t action, char *seen, size_t depth)
+size_t depth_get(const vertex_t *v, action_t action, char *seen, size_t depth)
 {
 	edge_t *edge;
 	size_t tmp, res = 0;
@@ -22,7 +22,7 @@ size_t depth(const vertex_t *v, action_t action, char *seen, size_t depth)
 	edge = v->edges;
 	while (edge)
 	{
-		tmp = depth(edge->dest, action, seen, depth + 1);
+		tmp = depth_get(edge->dest, action, seen, depth + 1);
 		if (tmp > res)
 			res = tmp;
 		edge = edge->next;
@@ -47,7 +47,7 @@ size_t depth_first_traverse(GRAPH, ACTION)
 	if (graph->nb_vertices)
 	{
 		seen = calloc(graph->nb_vertices, sizeof(char));
-		max_depth = depth(graph->vertices, action, seen, max_depth);
+		max_depth = depth_get(graph->vertices, action, seen, max_depth);
 		free(seen);
 	}
 	return (max_depth);
