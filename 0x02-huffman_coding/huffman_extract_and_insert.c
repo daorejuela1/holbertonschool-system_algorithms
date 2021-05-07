@@ -4,9 +4,7 @@
  * huffman_extract_and_insert - extract two nodes from the queue and insert
  * a single node that contains the sum of both frequencies of the two
  * extracted nodes
- *
  * @priority_queue: min heap of all the character data and frequencies
- *
  * Return: 1 on success, 0 on failure
  */
 int huffman_extract_and_insert(heap_t *priority_queue)
