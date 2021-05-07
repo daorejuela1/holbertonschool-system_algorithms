@@ -1,5 +1,4 @@
-SRC =	$(shell find . -name "*.c") \
-	$(shell find .. -name "*.c")
+SRC= huffman.c
 OBJ =	$(SRC:.c=.o)
 
 
