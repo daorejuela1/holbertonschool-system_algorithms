@@ -6,6 +6,15 @@
 #define LEFT (x - 1)
 #define TOP (y - 1)
 #define STRDUP(x) ((str = strdup(x)) ? str : (exit(1), NULL))
+#define ALLOCATE_ALL \
+	do { \
+		dists = calloc(graph->nb_vertices, sizeof(*dists)); \
+		fists = calloc(graph->nb_vertices, sizeof(*fists)); \
+		from = calloc(graph->nb_vertices, sizeof(*from)); \
+		verts = calloc(graph->nb_vertices, sizeof(*verts)); \
+	} while (0)
+#define H(a) ((int)sqrt(pow((a->x - target->x), 2) + \
+	pow((a->y - target->y), 2)))
 
 #include <sys/types.h>
 #include <unistd.h>
