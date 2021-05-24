@@ -31,7 +31,7 @@ static int backtrack(char **map, int rows, int cols, point_t const *target,
 	if (backtrack(map, rows, cols, target, RIGHT, y, path) ||
 			backtrack(map, rows, cols, target, x, BOTTOM, path) ||
 			backtrack(map, rows, cols, target, LEFT, y, path) ||
-			backtrack(map, rows, cols, target, TOP, x, path))
+			backtrack(map, rows, cols, target, x, TOP, path))
 		return (1);
 	free(dequeue(path));
 	return (0);
