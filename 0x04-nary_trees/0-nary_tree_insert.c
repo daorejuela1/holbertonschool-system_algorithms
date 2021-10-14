@@ -1,4 +1,10 @@
 #include "nary_trees.h"
+/**
+ * create_node - creates a new node
+ * @str: str to be used in the new node
+ *
+ * Return: new node or NULL in error
+ */
 static nary_tree_t *create_node(char const *str)
 {
 	nary_tree_t *new_node = NULL;
